@@ -22,7 +22,8 @@ const ROUTES: Routes = [
     { path: 'novo-residente', component: NovoResidenteComponent },
     { path: 'familiar-residente', component: FamiliarResidenteComponent },
     { path: 'convenio-residente', component: ConvenioResidenteComponent },
-    { path: ':id', component: ResidenteComponent }
+    { path: ':id', component: ResidenteComponent },
+    { path: 'residente-acomp', component: ResidenteAcompComponent }
 ]
 
 @NgModule({
