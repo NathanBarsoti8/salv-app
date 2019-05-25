@@ -14,7 +14,7 @@ import { InfosBeneficiosComponent } from './residente/infos-beneficios/infos-ben
 import { NovoResidenteComponent } from './novo-residente/novo-residente.component';
 import { FamiliarResidenteComponent } from './novo-residente/familiar-residente/familiar-residente.component';
 import { ConvenioResidenteComponent } from './novo-residente/convenio-residente/convenio-residente.component';
-import { ResidenteAcompComponent } from './residente-acomp/residente-acomp/residente-acomp.component';
+import { ResidenteAcompComponent } from './residente-acomp/residente-acomp.component';
 
 //Routes
 const ROUTES: Routes = [
