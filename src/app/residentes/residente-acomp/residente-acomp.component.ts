@@ -44,11 +44,12 @@ export class ResidenteAcompComponent implements OnInit {
   ngOnInit() {
 
     this.spinner.show();
-    this.acompanhamentosService.acompanhamentos()
+
+    this.acompanhamentosService.residenteAcomp(this.route.snapshot.params['id'])
       .subscribe(
-      acompanhamentos => {
-      this.acompanhamentos = acompanhamentos
-      console.log('acompanahmentos', this.acompanhamentos)
+      acomp => {
+      this.acompanhamentos = acomp
+      console.log('acompanhamentos', this.acompanhamentos)
       this.spinner.hide()
     })
 

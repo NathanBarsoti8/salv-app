@@ -22,6 +22,10 @@ export class AcompanhamentosService {
         return this.http.get<Acompanhamento[]>(`${SALV_API}/acompanhamento`)
     }
 
+    residenteAcomp(id: number): Observable<Acompanhamento[]> {
+        return this.http.get<Acompanhamento[]>(`${SALV_API}/residente-acomp/${id}`)
+    }
+
     acompanhamentoById(id: string): Observable<Acompanhamento> {
         return this.http.get<Acompanhamento>(`${SALV_API}/acompanhamento/${id}`)
     }
