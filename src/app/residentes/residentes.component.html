@@ -50,32 +50,6 @@
 
       <br>
 
-      <!-- <!--table class="table table-hover">
-        <tr>
-          <th>Nome</th>
-          <th>Apelido</th>
-          <th>CPF</th>
-          <th>RG</th>
-          <th class="col-sm-4">Ações</th>
-        </tr>
-        <tr *ngFor="let residente of residentes | paginate: { itemsPerPage: 10, currentPage: paginaAtual}">
-          <td>{{residente.PESSOA.NOME}} {{residente.PESSOA.SOBRENOME}}</td>
-          <td>{{residente.APELIDO}}</td>
-          <td>{{residente.PESSOA.CPF | cpf}}</td>
-          <td>{{residente.PESSOA.RG | rg}}</td>
-
-          <td>
-            <button type="submit" class="btn btn-danger botao"
-              (click)="deleteResidente(residente.CODIGO_RESIDENTE); $event.stopPropagation()">Inativar</button>
-            <a type="submit" class="btn btn-success botao" [routerLink]="['/residente', residente.CODIGO_RESIDENTE]">+
-              Opções</a>
-          </td>
-        </tr>
-
-      </table>
-      <pagination-controls class="my-pagination " (pageChange)="paginaAtual = $event" previousLabel="Anterior"
-        nextLabel="Próximo" screenReaderPaginationLabel="Paginação" screenReaderPageLabel="Página"
-        screenReaderCurrentLabel="Voce esta na página"></pagination-controls-->
 
       <div ng [hidden]="Desativados">
         <table class="table table-hover">
