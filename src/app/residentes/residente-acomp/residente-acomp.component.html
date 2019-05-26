@@ -1,74 +1,140 @@
+<ngx-spinner></ngx-spinner>
 <style>
-  #tabela1 {
-    border: 0px;
-    margin: 0px auto;
-    width: 500px;
-    height: 100px;
-    position: relative
+  .my-pagination /deep/ .ngx-pagination .current {
+    background: #00AE5D;
   }
 
-  #tabela2 {
-    border: 0px;
-    margin: 0px auto;
-    width: 500px;
-    height: 100px;
-    position: static
+  p {
+    max-width: 55ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 </style>
-<ngx-spinner></ngx-spinner>
+
 <section class="content">
-  <button (click)="reportAcompanhamento()" class="btn btn-success" id="printReport"><i class="fa fa-print"></i></button>
-  <div id="content">
-    <div class="box box-editar">
-      <h1>Detalhes do acompanhamento</h1>
-
-      <div>
-        <div class="box box-default box-solid">
-          <div class="box-header with-border">
 
 
-            <h3 class="box-title">Informações do acompanhamento</h3>
+  <button class="btn btn-success" id="printReport" data-toggle="modal" data-target="#modalReport"><i
+      class="fa fa-print"></i></button>
 
-            <div class="box-tools pull-right">
-              <a type="submit" class="btn btn-warning botao" data-toggle="modal"
-                data-target="#modalResidente">Editar</a>
+  <!--MODAL-->
+  <div class="modal fade" id="modalReport" tabindex="-1" role="dialog" aria-labelledby="modalReport" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form [formGroup]="dateReportForm" novalidate>
+            <div class="box-body">
+              <div>
+                <div class="col-sm-12 col-sm-12" id="formTitle">
+                  <h4 class="text-center"><strong>Relatório de acompanhamentos</strong></h4>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-xs-12" style="text-align: center; font-size: 11px; margin-left: -12px">
+                    Preencha apenas caso queira filtrar por data
+                  </div>
+                </div>
+                <hr class="col-6">
+                <div class="row">
+                  <div class="col-sm-6 col-xs-12">
+                    <label>De:</label>
+                    <input type="date" class="form-control pull-right" id="datepicker" formControlName="dateStart"
+                      max="2999-12-31">
+                  </div>
+                  <div class="col-sm-6 col-xs-12">
+                    <label>Até:</label>
+                    <input type="date" class="form-control pull-right" id="datepicker" formControlName="dateFinish"
+                      max="2999-12-31">
+                  </div>
+                </div>
+              </div>
             </div>
-
-          </div>
-
-
-          <div class="box-body" style>
-            <div>
-              <strong>Atividade realizada: </strong> {{acompanhamento1.ATIVIDADE}}
-              <strong style="margin-left: 30px"> Data: </strong> {{acompanhamento1.DATA_ACOMPANHAMENTO | date:'dd/MM/yyyy'}}
-            </div> <br>
-
-            <table class="table table-hover" id="tabela1" style="float:left; margin-top: 10px">
-              <tr>
-                <th>Funcionarios Participantes:</th>
-              </tr>
-              <tr *ngFor="let acompanhamento_funcionario of funcionarios1">
-                <td> {{acompanhamento_funcionario?.FNOME}}</td>
-              </tr>
-            </table>
-
-            <table class="table table-hover" id="tabela2" style="float:left; margin-top: 10px">
-              <tr>
-                <th>Residentes Participantes:</th>
-              </tr>
-              <tr *ngFor="let acompanhamento_residente of residentes1">
-                <td> {{acompanhamento_residente?.NOME}}</td>
-              </tr>
-            </table>
-
+          </form>
         </div>
-
-          <div class="botao">
-            <a type="submit" class="btn btn-default botao" [routerLink]="['/residentes']">Voltar</a>
-          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal"
+            (click)="reportAcompanhamentos()">Imprimir</button>
         </div>
       </div>
-      <!-- /.row -->
+    </div>
+  </div>
+  <!--FIM MODAL-->
+
+  <div id="content">
+    <div class="form-group">
+
+      <!-- FILTRO -->
+      <div class="btn-group pull-right" style="margin-right: 40px; margin-left: 40px">
+        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Filtro</button>
+
+        <ul class="dropdown-menu" role="menu">
+          <form [formGroup]="dateForm" novalidate>
+            <div class="col-sm-12 col-xs-12">  
+              <label>De:</label>
+              <input type="date" class="form-control pull-right" id="datepicker" formControlName="dateStart"
+                max="2999-12-31">
+            </div>
+            <div class="col-sm-12 col-xs-12" style="margin: 5px; margin-left: 0px">
+              <label>Até:</label>
+              <input type="date" class="form-control pull-right" id="datepicker" formControlName="dateFinish"
+                max="2999-12-31">
+            </div>
+            <hr class="col-6">
+            <button type="button" class="btn btn-block btn-success btn-xs" (click)="filtroData();">Filtrar</button>
+          </form>
+          
+
+        </ul>
+      </div>
+      <!-- FIM DO FILTRO -->
+
+      <!-- PESQUISA -->
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Pesquisar</button>
+
+        <ul class="dropdown-menu" role="menu">
+          <div class="input-group" style="margin: 5px">
+            <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+            <input input class="form-control" placeholder="Pesquisar" type="text" name="search" [(ngModel)]="filter"
+              style="height: 40px; width: 250px">
+          </div>
+        </ul>
+      </div>
+      <!-- FIM PESQUISA-->
+      <br>
+
+    </div>
+    <br>
+    <div class="box box-default table-responsive no-padding" [@residente-acompAppeared]="residenteacompState">
+      <h1>Visualização dos acompanhamentos</h1>
+
+      <br>
+      <table class="table table-hover" id="datatable">
+        <tr>
+          <th class="col-sm-4">Atividade realizada</th>
+          <th class="col-sm-4">Data</th>
+          <th class="col-sm-4">Ações</th>
+        </tr>
+        <tr
+          *ngFor="let acompanhamento of acompanhamentos | filter : filter : searchString | paginate: { itemsPerPage: 10, currentPage: paginaAtual} let i = index">
+          <td>
+            <p>{{acompanhamento.ATIVIDADE}}</p>
+          </td>
+          <td>{{acompanhamento.DATA_ACOMPANHAMENTO | date:'dd/MM/yyyy'}}</td>
+
+          <td>
+
+            <a type="submit" class="btn btn-success botao" [routerLink]="['/acompanhamentos', acompanhamento.CODIGO]">
+              + Opções</a>
+          </td>
+        </tr>
+
+      </table>
+      <pagination-controls class="my-pagination " (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+        nextLabel="Próximo" screenReaderPaginationLabel="Paginação" screenReaderPageLabel="Página"
+        screenReaderCurrentLabel="Voce esta na página"></pagination-controls>
+      <!-- Fim da tabela  -->
     </div>
   </div>
 </section>
