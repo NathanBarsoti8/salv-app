@@ -10,6 +10,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { ToastrModule } from 'ngx-toastr';
 
+import { ResidenteAcompComponent } from './../residentes/residente-acomp/residente-acomp.component';
+
 //Components
 import { InputComponent } from './input/input.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
@@ -71,6 +73,7 @@ import { ComplementoPipe } from './pipes/complemento.pipe';
         InputComponent,
         SnackbarComponent,
         RadioComponent,
+        ResidenteAcompComponent,
         //Pipes
         ApelidoPipe,
         CartaoSamsPipe,
@@ -127,6 +130,7 @@ import { ComplementoPipe } from './pipes/complemento.pipe';
         NgMultiSelectDropDownModule,
         Ng2SearchPipeModule,
         FilterPipeModule,
+        ResidenteAcompComponent,
         //Components
         InputComponent,
         SnackbarComponent,

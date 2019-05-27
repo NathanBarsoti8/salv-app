@@ -14,7 +14,7 @@ import { InfosBeneficiosComponent } from './residente/infos-beneficios/infos-ben
 import { NovoResidenteComponent } from './novo-residente/novo-residente.component';
 import { FamiliarResidenteComponent } from './novo-residente/familiar-residente/familiar-residente.component';
 import { ConvenioResidenteComponent } from './novo-residente/convenio-residente/convenio-residente.component';
-import { ResidenteAcompComponent } from './residente-acomp/residente-acomp.component';
+
 
 //Routes
 const ROUTES: Routes = [
@@ -22,7 +22,7 @@ const ROUTES: Routes = [
     { path: 'novo-residente', component: NovoResidenteComponent },
     { path: 'familiar-residente', component: FamiliarResidenteComponent },
     { path: 'convenio-residente', component: ConvenioResidenteComponent },
-    { path: 'residente-acomp', component: ResidenteAcompComponent },
+    
     { path: ':id', component: ResidenteComponent }
 ]
 
@@ -36,8 +36,7 @@ const ROUTES: Routes = [
         InfosPessoaisComponent,
         NovoResidenteComponent,
         FamiliarResidenteComponent,
-        ConvenioResidenteComponent,
-        ResidenteAcompComponent
+        ConvenioResidenteComponent
     ],
     imports: [
         SharedModule,

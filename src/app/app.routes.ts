@@ -8,6 +8,7 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
 import { FirstAccessComponent } from './auth/first-access/first-access.component';
 
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service'
+import { ResidenteAcompComponent } from './residentes/residente-acomp/residente-acomp.component';
 
 export const ROUTES: Routes = [
     { path: 'login', component: LoginComponent },
@@ -16,6 +17,8 @@ export const ROUTES: Routes = [
     { path: 'esqueci-a-senha', component: ForgetPasswordComponent },
     { path: 'esqueci-a-senha/:token', component: ResetPasswordComponent },
     { path: 'primeiro-acesso/:username', component: FirstAccessComponent },
+
+    { path: 'residente-acomp/:id', component: ResidenteAcompComponent },
 
     { path: 'convenios', loadChildren: './convenios/convenio.module#ConvenioModule', canActivate: [AuthGuard] },
     { path: 'funcionarios', loadChildren: './funcionarios/funcionario.module#FuncionarioModule', canActivate: [AuthGuard] },
