@@ -97,7 +97,7 @@ export class ResidenteAcompComponent implements OnInit {
 
     if (dates.dateFinish == null) {
         this.spinner.show()
-    this.acompanhamentosService.filtroDataInicial(dates).subscribe((response) => {
+    this.acompanhamentosService.filtroDataInicialResidente(dates).subscribe((response) => {
         this.acompanhamentos = response
         this.dateForm.reset()
         this.spinner.hide()
@@ -105,7 +105,7 @@ export class ResidenteAcompComponent implements OnInit {
     })
     } else {
         this.spinner.show()
-        this.acompanhamentosService.filtroDataInicialFinal(dates)
+        this.acompanhamentosService.filtroDataInicialFinalResidente(dates)
         .subscribe((response) => {
             this.acompanhamentos = response
             this.dateForm.reset()

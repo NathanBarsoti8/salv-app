@@ -89,6 +89,14 @@ export class AcompanhamentosService {
         return this.http.post<Acompanhamento[]>(`${SALV_API}/acompanhamento-data-inicial-final`, dates)
     }
 
+    filtroDataInicialResidente(dates): Observable<Acompanhamento[]> {
+        return this.http.post<Acompanhamento[]>(`${SALV_API}//acompanhamento-data-inicial-residente`, dates)
+    }
+    
+    filtroDataInicialFinalResidente(dates): Observable<Acompanhamento[]> {
+        return this.http.post<Acompanhamento[]>(`${SALV_API}/acompanhamento-data-inicial-final-residente`, dates)
+    }
+
     reportAcompanhamentos(dates): Observable<Blob> {
         return this.http.post(`${SALV_API}/relatorio-acompanhamentos`, dates, { responseType: 'blob' })
     }
