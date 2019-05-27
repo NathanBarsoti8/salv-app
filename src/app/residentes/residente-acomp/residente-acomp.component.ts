@@ -31,6 +31,14 @@ export class ResidenteAcompComponent implements OnInit {
   
   acompanhamentos: Acompanhamento[]
 
+  acompanhamento1: Acompanhamento
+  atividade
+  data_atividade
+  funcionarios1: any[]
+  residentes1: any[]
+  residentes: any = []
+  funcionarios: any = []
+
   public filter
 
   constructor(private acompanhamentosService: AcompanhamentosService, 
@@ -57,6 +65,30 @@ export class ResidenteAcompComponent implements OnInit {
       dateStart: this.fb.control(null),
       dateFinish: this.fb.control(null)
     })
+
+
+
+    this.acompanhamentosService.acompanhamentoById(this.route.snapshot.params['id'])
+      .subscribe((acompanhamento: Acompanhamento) => {
+        this.spinner.hide()
+        this.acompanhamento1 = acompanhamento[0]; console.log(this.acompanhamento1)
+        this.atividade = acompanhamento[0].ATIVIDADE
+        this.data_atividade = acompanhamento[0].DATA_ACOMPANHAMENTO
+      })
+
+      this.acompanhamentosService.AcompanhamentoFuncionarioQuery(this.route.snapshot.params['id']).subscribe(acompanhamento_funcionario => {
+        this.spinner.hide()
+        this.funcionarios1 = acompanhamento_funcionario
+        console.log('funcionario', this.funcionarios)
+      })
+  
+      this.acompanhamentosService.AcompanhamentoResidenteQuery(this.route.snapshot.params['id']).subscribe(acompanhamento_residente => {
+        this.spinner.hide()
+        this.residentes1 = acompanhamento_residente
+  
+        console.log('residente', this.residentes)
+      })
+
     
   }
 

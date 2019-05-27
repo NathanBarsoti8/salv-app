@@ -125,9 +125,10 @@
 
           <td>
 
-            <!-- <button type="button" class="btb btn-succes" data-toggle="modal" attr.data-target="#modalExibirAcompanhamento{{}}">
-              Informações
-            </button> -->
+
+            <button type="button" class="btn btn-success" data-toggle="modal" attr.data-target="#modalExibirConvenio{{acompanhamento?.CODIGO}}">
+                Informações
+            </button>
 
             <!-- <a type="submit" class="btn btn-success botao" [routerLink]="['/acompanhamentos', acompanhamento.CODIGO]">
               + Opções</a> -->
@@ -135,7 +136,7 @@
         </tr>
 
         <!-- INICIO MODAL INFORMAÇÃO DO ACOMPANHAMENTO -->
-        <div class="modal fade" id="modalExibirAcompanhamento{{}}" tabindex="-1" role="dialog" attr.aria-labelledby="modalExibirAcompanhamento{{}}" aria-hidden="true">
+        <div class="modal fade" id="modalExibirAcompanhamento{{acompanhamento?.CODIGO}}" tabindex="-1" role="dialog" attr.aria-labelledby="modalExibirAcompanhamento{{acompanhamento?.CODIGO}}" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-body">
@@ -149,7 +150,6 @@
 
                 <!-- INICIO DIV CLASS BOX-BODY -->
                 <div class="box-body">
-                    
                     <div>
                         <strong>Atividade realizada: </strong> {{acompanhamento1.ATIVIDADE}}
                         <strong style="margin-left: 30px"> Data: </strong> {{acompanhamento1.DATA_ACOMPANHAMENTO | date:'dd/MM/yyyy'}}
@@ -173,7 +173,6 @@
                           <td> {{acompanhamento_residente?.NOME}}</td>
                         </tr>
                     </table>
-
                 </div>
                 <!-- FIM DIV CLASS BOX-BODY -->
               </div>
