@@ -123,6 +123,7 @@ export class ResidenteAcompComponent implements OnInit {
     }
   }
 
+  //Função responsável por receber o blob vindo do backend e transformar ele em pdf
   prontuarioResidente() {
     let dates = this.prontuarioForm.value
     dates.codigoResidente = this.residentes[0].CODIGO_RESIDENTE
