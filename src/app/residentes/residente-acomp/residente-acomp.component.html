@@ -15,19 +15,20 @@
 <section class="content">
 
 
-  <button class="btn btn-success" id="printReport" data-toggle="modal" data-target="#modalReport"><i
+  <button class="btn btn-success" id="printReport" data-toggle="modal" data-target="#prontuarioModal"><i
       class="fa fa-print"></i></button>
 
   <!--MODAL-->
-  <div class="modal fade" id="modalReport" tabindex="-1" role="dialog" aria-labelledby="modalReport" aria-hidden="true">
+  <div class="modal fade" id="prontuarioModal" tabindex="-1" role="dialog" aria-labelledby="prontuarioModal"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">
-          <form [formGroup]="dateReportForm" novalidate>
+          <form [formGroup]="prontuarioForm" novalidate>
             <div class="box-body">
               <div>
                 <div class="col-sm-12 col-sm-12" id="formTitle">
-                  <h4 class="text-center"><strong>Relatório de acompanhamentos</strong></h4>
+                  <h4 class="text-center"><strong>Prontuário</strong></h4>
                 </div>
                 <div class="row">
                   <div class="col-sm-12 col-xs-12" style="text-align: center; font-size: 11px; margin-left: -12px">
@@ -54,7 +55,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-success" data-dismiss="modal"
-            (click)="reportAcompanhamentos()">Imprimir</button>
+            (click)="prontuarioResidente()">Imprimir</button>
         </div>
       </div>
     </div>
