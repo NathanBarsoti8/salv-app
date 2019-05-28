@@ -70,7 +70,7 @@
 
         <ul class="dropdown-menu" role="menu">
           <form [formGroup]="dateForm" novalidate>
-            <div class="col-sm-12 col-xs-12">  
+            <div class="col-sm-12 col-xs-12">
               <label>De:</label>
               <input type="date" class="form-control pull-right" id="datepicker" formControlName="dateStart"
                 max="2999-12-31">
@@ -83,7 +83,7 @@
             <hr class="col-6">
             <button type="button" class="btn btn-block btn-success btn-xs" (click)="filtroData();">Filtrar</button>
           </form>
-          
+
 
         </ul>
       </div>
@@ -126,8 +126,9 @@
           <td>
 
 
-            <button type="button" class="btn btn-success" data-toggle="modal" attr.data-target="#modalExibirConvenio{{acompanhamento?.CODIGO}}">
-                Informações
+            <button type="button" class="btn btn-success" data-toggle="modal"
+              attr.data-target="#modalExibirConvenio{{acompanhamento?.CODIGO}}">
+              Informações
             </button>
 
             <!-- <a type="submit" class="btn btn-success botao" [routerLink]="['/acompanhamentos', acompanhamento.CODIGO]">
@@ -136,43 +137,45 @@
         </tr>
 
         <!-- INICIO MODAL INFORMAÇÃO DO ACOMPANHAMENTO -->
-        <div class="modal fade" id="modalExibirAcompanhamento{{acompanhamento?.CODIGO}}" tabindex="-1" role="dialog" attr.aria-labelledby="modalExibirAcompanhamento{{acompanhamento?.CODIGO}}" aria-hidden="true">
+        <div class="modal fade" id="modalExibirAcompanhamento{{acompanhamento?.CODIGO}}" tabindex="-1" role="dialog"
+          attr.aria-labelledby="modalExibirAcompanhamento{{acompanhamento?.CODIGO}}" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-body">
 
                 <div class="col-sm-12 col-sm-12" id="formTitle">
                   <h4 class="text-center"><strong>
-                    Informações do acompanhamento
-                  </strong>
+                      Informações do acompanhamento
+                    </strong>
                   </h4>
                 </div>
 
                 <!-- INICIO DIV CLASS BOX-BODY -->
                 <div class="box-body">
-                    <div>
-                        <strong>Atividade realizada: </strong> {{acompanhamento1.ATIVIDADE}}
-                        <strong style="margin-left: 30px"> Data: </strong> {{acompanhamento1.DATA_ACOMPANHAMENTO | date:'dd/MM/yyyy'}}
-                    </div> 
-                    <br>
+                  <div>
+                    <strong>Atividade realizada: </strong> {{acompanhamento1.ATIVIDADE}}
+                    <strong style="margin-left: 30px"> Data: </strong>
+                    {{acompanhamento1.DATA_ACOMPANHAMENTO | date:'dd/MM/yyyy'}}
+                  </div>
+                  <br>
 
-                    <table class="table table-hover" id="tabela1" style="float:left; margin-top: 10px">
-                        <tr>
-                          <th>Funcionarios Participantes:</th>
-                        </tr>
-                        <tr *ngFor="let acompanhamento_funcionario of funcionarios1">
-                          <td> {{acompanhamento_funcionario?.FNOME}}</td>
-                        </tr>
-                    </table>
+                  <table class="table table-hover" id="tabela1" style="float:left; margin-top: 10px">
+                    <tr>
+                      <th>Funcionarios Participantes:</th>
+                    </tr>
+                    <tr *ngFor="let acompanhamento_funcionario of funcionarios1">
+                      <td> {{acompanhamento_funcionario?.FNOME}}</td>
+                    </tr>
+                  </table>
 
-                    <table class="table table-hover" id="tabela2" style="float:left; margin-top: 10px">
-                        <tr>
-                          <th>Residentes Participantes:</th>
-                        </tr>
-                        <tr *ngFor="let acompanhamento_residente of residentes1">
-                          <td> {{acompanhamento_residente?.NOME}}</td>
-                        </tr>
-                    </table>
+                  <table class="table table-hover" id="tabela2" style="float:left; margin-top: 10px">
+                    <tr>
+                      <th>Residentes Participantes:</th>
+                    </tr>
+                    <tr *ngFor="let acompanhamento_residente of residentes1">
+                      <td> {{acompanhamento_residente?.NOME}}</td>
+                    </tr>
+                  </table>
                 </div>
                 <!-- FIM DIV CLASS BOX-BODY -->
               </div>
