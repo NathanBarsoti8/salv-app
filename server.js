@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'production') {
 // Add headers
 app.use(function (req, res, next) {
 
-    // Website you wish to allow to connect
+    // Website you wish to allow to connect.
     res.setHeader('Access-Control-Allow-Origin', 'https://drvida-api.herokuapp.com');
 
     // Request methods you wish to allow

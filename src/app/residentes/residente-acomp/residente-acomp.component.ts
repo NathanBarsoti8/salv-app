@@ -6,17 +6,18 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { ProntuarioService } from './residente-acomp.service'
 
 @Component({
   selector: 'salv-residente-acomp',
   templateUrl: './residente-acomp.component.html',
   animations: [
     trigger('residente-acompAppeared', [
-        state('ready', style({ opacity: 1 })),
-        transition('void => ready', [
-            style({ opacity: 0, transform: 'translate(-30px, -10px)' }),
-            animate('500ms 0s ease-in-out')
-        ])
+      state('ready', style({ opacity: 1 })),
+      transition('void => ready', [
+        style({ opacity: 0, transform: 'translate(-30px, -10px)' }),
+        animate('500ms 0s ease-in-out')
+      ])
     ])
   ]
 })
@@ -26,9 +27,10 @@ export class ResidenteAcompComponent implements OnInit {
   residenteacompState = 'ready'
 
   dateForm: FormGroup
+  prontuarioForm: FormGroup
 
   public searchString: string;
-  
+
   acompanhamentos: Acompanhamento[]
 
   acompanhamento1: Acompanhamento
@@ -41,11 +43,12 @@ export class ResidenteAcompComponent implements OnInit {
 
   public filter
 
-  constructor(private acompanhamentosService: AcompanhamentosService, 
-              private route: ActivatedRoute, 
-              private spinner: NgxSpinnerService, 
-              private ns: NotificationService, 
-              private fb: FormBuilder) { }
+  constructor(private acompanhamentosService: AcompanhamentosService,
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService,
+    private ns: NotificationService,
+    private fb: FormBuilder,
+    private ps: ProntuarioService) { }
 
   paginaAtual: number = 1;
 
@@ -55,13 +58,18 @@ export class ResidenteAcompComponent implements OnInit {
 
     this.acompanhamentosService.residenteAcomp(this.route.snapshot.params['id'])
       .subscribe(
-      acomp => {
-      this.acompanhamentos = acomp
-      console.log('acompanhamentos', this.acompanhamentos)
-      this.spinner.hide()
-    })
+        acomp => {
+          this.acompanhamentos = acomp
+          console.log('acompanhamentos', this.acompanhamentos)
+          this.spinner.hide()
+        })
 
     this.dateForm = this.fb.group({
+      dateStart: this.fb.control(null),
+      dateFinish: this.fb.control(null)
+    })
+
+    this.prontuarioForm = this.fb.group({
       dateStart: this.fb.control(null),
       dateFinish: this.fb.control(null)
     })
@@ -76,43 +84,72 @@ export class ResidenteAcompComponent implements OnInit {
         this.data_atividade = acompanhamento[0].DATA_ACOMPANHAMENTO
       })
 
-      this.acompanhamentosService.AcompanhamentoFuncionarioQuery(this.route.snapshot.params['id']).subscribe(acompanhamento_funcionario => {
-        this.spinner.hide()
-        this.funcionarios1 = acompanhamento_funcionario
-        console.log('funcionario', this.funcionarios)
-      })
-  
-      this.acompanhamentosService.AcompanhamentoResidenteQuery(this.route.snapshot.params['id']).subscribe(acompanhamento_residente => {
-        this.spinner.hide()
-        this.residentes1 = acompanhamento_residente
-  
-        console.log('residente', this.residentes)
-      })
+    this.acompanhamentosService.AcompanhamentoFuncionarioQuery(this.route.snapshot.params['id']).subscribe(acompanhamento_funcionario => {
+      this.spinner.hide()
+      this.funcionarios1 = acompanhamento_funcionario
+      console.log('funcionario', this.funcionarios)
+    })
 
-    
+    this.acompanhamentosService.AcompanhamentoResidenteQuery(this.route.snapshot.params['id']).subscribe(acompanhamento_residente => {
+      this.spinner.hide()
+      this.residentes1 = acompanhamento_residente
+
+      console.log('residente', this.residentes)
+    })
+
+
   }
 
-  filtroData () {
+  filtroData() {
     let dates = this.dateForm.value
 
     if (dates.dateFinish == null) {
-        this.spinner.show()
-    this.acompanhamentosService.filtroDataInicialResidente(dates).subscribe((response) => {
+      this.spinner.show()
+      this.acompanhamentosService.filtroDataInicialResidente(dates).subscribe((response) => {
         this.acompanhamentos = response
         this.dateForm.reset()
         this.spinner.hide()
         console.log(dates)
-    })
+      })
     } else {
-        this.spinner.show()
-        this.acompanhamentosService.filtroDataInicialFinalResidente(dates)
+      this.spinner.show()
+      this.acompanhamentosService.filtroDataInicialFinalResidente(dates)
         .subscribe((response) => {
-            this.acompanhamentos = response
-            this.dateForm.reset()
-            this.spinner.hide()
-            console.log(dates)
+          this.acompanhamentos = response
+          this.dateForm.reset()
+          this.spinner.hide()
+          console.log(dates)
         })
     }
-  } 
+  }
+
+  //Função responsável por receber o blob vindo da api e transformar ele em pdf
+  prontuarioResidente() {
+    let dates = this.prontuarioForm.value
+    dates.codigoResidente = this.route.snapshot.params['id']
+    this.spinner.show()
+    this.ps.prontuarioResidente(dates).subscribe((x) => {
+      var newBlob = new Blob([x], { type: 'application/pdf' })
+
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(newBlob)
+        return
+      }
+
+      const data = window.URL.createObjectURL(newBlob)
+      var link = document.createElement('a')
+      link.href = data
+      link.download = "Prontuário.pdf"
+      link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
+
+      setTimeout(function () {
+        window.URL.revokeObjectURL(data)
+        link.remove()
+      }, 100)
+      this.prontuarioForm.reset()
+      this.spinner.hide()
+      this.ns.notify('Prontuário emitido com sucesso')
+    })
+  }
 
 }
