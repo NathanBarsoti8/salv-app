@@ -27,6 +27,7 @@ export class ResidenteAcompComponent implements OnInit {
   residenteacompState = 'ready'
 
   dateForm: FormGroup
+  prontuarioForm: FormGroup
 
   public searchString: string;
 
@@ -46,7 +47,8 @@ export class ResidenteAcompComponent implements OnInit {
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private ns: NotificationService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private ps: ProntuarioService) { }
 
   paginaAtual: number = 1;
 
@@ -63,6 +65,11 @@ export class ResidenteAcompComponent implements OnInit {
         })
 
     this.dateForm = this.fb.group({
+      dateStart: this.fb.control(null),
+      dateFinish: this.fb.control(null)
+    })
+
+    this.prontuarioForm = this.fb.group({
       dateStart: this.fb.control(null),
       dateFinish: this.fb.control(null)
     })
@@ -114,6 +121,34 @@ export class ResidenteAcompComponent implements OnInit {
           console.log(dates)
         })
     }
+  }
+
+  prontuarioResidente() {
+    let dates = this.prontuarioForm.value
+    dates.codigoResidente = this.residentes[0].CODIGO_RESIDENTE
+    this.spinner.show()
+    this.ps.prontuarioResidente(dates).subscribe((x) => {
+      var newBlob = new Blob([x], { type: 'application/pdf' })
+
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(newBlob)
+        return
+      }
+
+      const data = window.URL.createObjectURL(newBlob)
+      var link = document.createElement('a')
+      link.href = data
+      link.download = "Prontuário.pdf"
+      link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
+
+      setTimeout(function () {
+        window.URL.revokeObjectURL(data)
+        link.remove()
+      }, 100)
+      this.prontuarioForm.reset()
+      this.spinner.hide()
+      this.ns.notify('Prontuário emitido com sucesso')
+    })
   }
 
 }
