@@ -123,10 +123,10 @@ export class ResidenteAcompComponent implements OnInit {
     }
   }
 
-  //Função responsável por receber o blob vindo do backend e transformar ele em pdf
+  //Função responsável por receber o blob vindo da api e transformar ele em pdf
   prontuarioResidente() {
     let dates = this.prontuarioForm.value
-    dates.codigoResidente = this.residentes[0].CODIGO_RESIDENTE
+    dates.codigoResidente = this.route.snapshot.params['id']
     this.spinner.show()
     this.ps.prontuarioResidente(dates).subscribe((x) => {
       var newBlob = new Blob([x], { type: 'application/pdf' })
