@@ -4,7 +4,7 @@ import { Observable } from "rxjs"
 import { SALV_API } from './../../app.api'
 
 @Injectable()
-export class ResidenteAcompanhamentoService {
+export class ProntuarioService {
 
     constructor(private http: HttpClient) { }
 

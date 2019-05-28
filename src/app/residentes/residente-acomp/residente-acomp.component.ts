@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { ProntuarioService } from './residente-acomp.service'
 
 @Component({
   selector: 'salv-residente-acomp',
