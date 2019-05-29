@@ -99,35 +99,32 @@ export class ResidenteAcompComponent implements OnInit {
 
 
   }
-
-  filtroData() {
+  
+  filtroData () {
     let dates = this.dateForm.value
 
-    dates.codigoResidente = this.route.snapshot.params['id']
+    dates.CODIGO_RESIDENTE = this.route.snapshot.params['id']
 
     if (dates.dateFinish == null) {
-      this.spinner.show()
-      this.acompanhamentosService.filtroDataInicialResidente(dates)
-      .subscribe((response) => {
-        console.log("ACOMPS", this.acompanhamentos)
+        this.spinner.show()
+    this.acompanhamentosService.filtroDataInicialResidente(dates).subscribe((response) => {
         this.acompanhamentos = response
         this.dateForm.reset()
         this.spinner.hide()
-        console.log("Datas", dates)
-        console.log("Retorno", response)
-      })
+        console.log(dates)
+        console.log(response)
+    })
     } else {
-      this.spinner.show()
-      this.acompanhamentosService.filtroDataInicialFinalResidente(dates)
-        .subscribe((response) => {
-          this.acompanhamentos = response
-          this.dateForm.reset()
-          this.spinner.hide()
-          console.log("Datas", dates)
-          console.log("Retorno", response)
+        this.spinner.show()
+        this.acompanhamentosService.filtroDataInicialFinalResidente(dates).subscribe((response) => {
+            this.acompanhamentos = response
+            this.dateForm.reset()
+            this.spinner.hide()
+            console.log(dates)
+            console.log(response)
         })
     }
-  }
+}
 
   //Função responsável por receber o blob vindo da api e transformar ele em pdf
   prontuarioResidente() {
