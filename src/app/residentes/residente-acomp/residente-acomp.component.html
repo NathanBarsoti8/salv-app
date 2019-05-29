@@ -127,8 +127,7 @@
           <td>
 
 
-            <button type="button" class="btn btn-success" data-toggle="modal"
-              attr.data-target="#modalExibirConvenio{{acompanhamento?.CODIGO}}">
+            <button type="button" class="btn btn-success" style="margin-right: -30px;" data-toggle="modal" attr.data-target="#modal-default{{convenio?.ACOMPANHAMENTO_CODIGO}}">
               Informações
             </button>
 
@@ -138,57 +137,47 @@
         </tr>
 
         <!-- INICIO MODAL INFORMAÇÃO DO ACOMPANHAMENTO -->
-        <div class="modal fade" id="modalExibirAcompanhamento{{acompanhamento?.CODIGO}}" tabindex="-1" role="dialog"
-          attr.aria-labelledby="modalExibirAcompanhamento{{acompanhamento?.CODIGO}}" aria-hidden="true">
-          <div class="modal-dialog" role="document">
+        <div class="modal fade" id="modal-default{{acompanhamento?.CODIGO}}" tabindex="-1" role="dialog" attr.aria-labelledby="modal-default{{acompanhamento?.CODIGO}}" aria-hidden="true" style="padding-right: 17px;">
+          <div class="modal-dialog">
             <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="text-center"><strong>Informações do acompanhamento</strong></h4>
+              </div>
+
+              <!-- INICIO DIV CLASS BOX-BODY -->
               <div class="modal-body">
-
-                <div class="col-sm-12 col-sm-12" id="formTitle">
-                  <h4 class="text-center"><strong>
-                      Informações do acompanhamento
-                    </strong>
-                  </h4>
-                </div>
-
-                <!-- INICIO DIV CLASS BOX-BODY -->
-                <div class="box-body">
                   <div>
-                    <strong>Atividade realizada: </strong> {{acompanhamento1.ATIVIDADE}}
-                    <strong style="margin-left: 30px"> Data: </strong>
-                    {{acompanhamento1.DATA_ACOMPANHAMENTO | date:'dd/MM/yyyy'}}
+                      <strong>Atividade realizada: </strong> {{acompanhamento1.ATIVIDADE}}
+                      <strong style="margin-left: 30px"> Data: </strong>
+                      {{acompanhamento1.DATA_ACOMPANHAMENTO | date:'dd/MM/yyyy'}}
                   </div>
                   <br>
 
                   <table class="table table-hover" id="tabela1" style="float:left; margin-top: 10px">
-                    <tr>
-                      <th>Funcionarios Participantes:</th>
-                    </tr>
-                    <tr *ngFor="let acompanhamento_funcionario of funcionarios1">
-                      <td> {{acompanhamento_funcionario?.FNOME}}</td>
-                    </tr>
+                      <tr>
+                        <th>Funcionarios Participantes:</th>
+                      </tr>
+                      <tr *ngFor="let acompanhamento_funcionario of funcionarios1">
+                        <td> {{acompanhamento_funcionario?.FNOME}}</td>
+                      </tr>
                   </table>
 
                   <table class="table table-hover" id="tabela2" style="float:left; margin-top: 10px">
-                    <tr>
-                      <th>Residentes Participantes:</th>
-                    </tr>
-                    <tr *ngFor="let acompanhamento_residente of residentes1">
-                      <td> {{acompanhamento_residente?.NOME}}</td>
-                    </tr>
+                      <tr>
+                        <th>Residentes Participantes:</th>
+                      </tr>
+                      <tr *ngFor="let acompanhamento_residente of residentes1">
+                        <td> {{acompanhamento_residente?.NOME}}</td>
+                      </tr>
                   </table>
-                </div>
-                <!-- FIM DIV CLASS BOX-BODY -->
               </div>
+              <!-- FIM DIV CLASS BOX-BODY -->
 
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                  Voltar
-                </button>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Voltar</button>
               </div>
-
-            </div>
-          </div>
+            </div> <!-- /.modal-content -->
+          </div> <!-- /.modal-dialog -->
         </div>
         <!-- FIM DO MODAL INFORMAÇÃO DO ACOMPANHAMENTO -->
 

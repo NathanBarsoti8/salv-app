@@ -40,6 +40,7 @@ export class ResidenteAcompComponent implements OnInit {
   residentes1: any[]
   residentes: any = []
   funcionarios: any = []
+  codigo_acompanhamento: any
 
   public filter
 
@@ -76,7 +77,7 @@ export class ResidenteAcompComponent implements OnInit {
 
 
 
-    this.acompanhamentosService.acompanhamentoById(this.route.snapshot.params['id'])
+    this.acompanhamentosService.acompanhamentoById(this.codigo_acompanhamento)
       .subscribe((acompanhamento: Acompanhamento) => {
         this.spinner.hide()
         this.acompanhamento1 = acompanhamento[0]; console.log(this.acompanhamento1)
@@ -84,13 +85,13 @@ export class ResidenteAcompComponent implements OnInit {
         this.data_atividade = acompanhamento[0].DATA_ACOMPANHAMENTO
       })
 
-    this.acompanhamentosService.AcompanhamentoFuncionarioQuery(this.route.snapshot.params['id']).subscribe(acompanhamento_funcionario => {
+    this.acompanhamentosService.AcompanhamentoFuncionarioQuery(this.codigo_acompanhamento).subscribe(acompanhamento_funcionario => {
       this.spinner.hide()
       this.funcionarios1 = acompanhamento_funcionario
       console.log('funcionario', this.funcionarios)
     })
 
-    this.acompanhamentosService.AcompanhamentoResidenteQuery(this.route.snapshot.params['id']).subscribe(acompanhamento_residente => {
+    this.acompanhamentosService.AcompanhamentoResidenteQuery(this.codigo_acompanhamento).subscribe(acompanhamento_residente => {
       this.spinner.hide()
       this.residentes1 = acompanhamento_residente
 
@@ -99,6 +100,7 @@ export class ResidenteAcompComponent implements OnInit {
 
 
   }
+
   
   filtroData () {
     let dates = this.dateForm.value
