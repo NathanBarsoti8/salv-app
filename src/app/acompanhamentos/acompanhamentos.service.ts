@@ -89,12 +89,12 @@ export class AcompanhamentosService {
         return this.http.post<Acompanhamento[]>(`${SALV_API}/acompanhamento-data-inicial-final`, dates)
     }
 
-    filtroDataInicialResidente(dates, idResidente: number): Observable<Acompanhamento[]> {
-        return this.http.post<Acompanhamento[]>(`${SALV_API}//acompanhamento-data-inicial-residente/${idResidente}`, dates)
+    filtroDataInicialResidente(dates): Observable<Acompanhamento[]> {
+        return this.http.post<Acompanhamento[]>(`${SALV_API}/acompanhamento-data-inicial-residente`, dates)
     }
     
-    filtroDataInicialFinalResidente(dates, idResidente: number): Observable<Acompanhamento[]> {
-        return this.http.post<Acompanhamento[]>(`${SALV_API}/acompanhamento-data-inicial-final-residente/${idResidente}`, dates)
+    filtroDataInicialFinalResidente(dates): Observable<Acompanhamento[]> {
+        return this.http.post<Acompanhamento[]>(`${SALV_API}/acompanhamento-data-inicial-final-residente`, dates)
     }
 
     reportAcompanhamentos(dates): Observable<Blob> {

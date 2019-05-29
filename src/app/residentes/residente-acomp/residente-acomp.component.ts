@@ -103,13 +103,18 @@ export class ResidenteAcompComponent implements OnInit {
   filtroData() {
     let dates = this.dateForm.value
 
+    dates.codigoResidente = this.route.snapshot.params['id']
+
     if (dates.dateFinish == null) {
       this.spinner.show()
-      this.acompanhamentosService.filtroDataInicialResidente(dates).subscribe((response) => {
+      this.acompanhamentosService.filtroDataInicialResidente(dates)
+      .subscribe((response) => {
+        console.log("ACOMPS", this.acompanhamentos)
         this.acompanhamentos = response
         this.dateForm.reset()
         this.spinner.hide()
-        console.log(dates)
+        console.log("Datas", dates)
+        console.log("Retorno", response)
       })
     } else {
       this.spinner.show()
@@ -118,7 +123,8 @@ export class ResidenteAcompComponent implements OnInit {
           this.acompanhamentos = response
           this.dateForm.reset()
           this.spinner.hide()
-          console.log(dates)
+          console.log("Datas", dates)
+          console.log("Retorno", response)
         })
     }
   }
