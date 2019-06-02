@@ -2,7 +2,7 @@ import { Funcionario } from './../funcionarios/funcionario.model';
 import { SALV_API } from './../app.api';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, ObservableLike } from "rxjs";
 import {
     Acompanhamento,
     AcompanhamentoQuery,
@@ -103,6 +103,10 @@ export class AcompanhamentosService {
 
     reportAcompanhamento(cod_acomp): Observable<Blob> {
         return this.http.get(`${SALV_API}/relatorio-acompanhamento/${cod_acomp}`, { responseType: 'blob' })
+    }
+
+    acompFull(): Observable<Acompanhamento[]> {
+        return this.http.get<Acompanhamento[]>(`${SALV_API}/acompanhamento-residente`)
     }
 
 }

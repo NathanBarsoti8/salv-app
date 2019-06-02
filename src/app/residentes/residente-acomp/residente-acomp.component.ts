@@ -77,14 +77,6 @@ export class ResidenteAcompComponent implements OnInit {
 
 
 
-    this.acompanhamentosService.acompanhamentoById(this.codigo_acompanhamento)
-      .subscribe((acompanhamento: Acompanhamento) => {
-        this.spinner.hide()
-        this.acompanhamento1 = acompanhamento[0]; console.log(this.acompanhamento1)
-        this.atividade = acompanhamento[0].ATIVIDADE
-        this.data_atividade = acompanhamento[0].DATA_ACOMPANHAMENTO
-      })
-
     this.acompanhamentosService.AcompanhamentoFuncionarioQuery(this.codigo_acompanhamento).subscribe(acompanhamento_funcionario => {
       this.spinner.hide()
       this.funcionarios1 = acompanhamento_funcionario
@@ -99,6 +91,16 @@ export class ResidenteAcompComponent implements OnInit {
     })
 
 
+  }
+
+  acompFull() {
+
+    this.acompanhamentosService.acompFull()
+      .subscribe((response) => {
+        this.spinner.hide()
+        this.acompanhamentos = response
+        console.log(response)
+      })
   }
 
   

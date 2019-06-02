@@ -127,7 +127,7 @@
           <td>
 
 
-            <button type="button" class="btn btn-success" style="margin-right: -30px;" data-toggle="modal" attr.data-target="#modal-default{{convenio?.ACOMPANHAMENTO_CODIGO}}">
+            <button type="button" class="btn btn-success" style="margin-right: -30px;" data-toggle="modal" attr.data-target="#modal-default{{acompanhamento.CODIGO}}" (click)="acompFull()">
               Informações
             </button>
 
@@ -137,7 +137,7 @@
         </tr>
 
         <!-- INICIO MODAL INFORMAÇÃO DO ACOMPANHAMENTO -->
-        <div class="modal fade" id="modal-default{{acompanhamento?.CODIGO}}" tabindex="-1" role="dialog" attr.aria-labelledby="modal-default{{acompanhamento?.CODIGO}}" aria-hidden="true" style="padding-right: 17px;">
+        <div class="modal fade" id="modal-default{{acompanhamento.CODIGO}}" tabindex="-1" role="dialog" attr.aria-labelledby="modal-default{{acompanhamento.CODIGO}}" aria-hidden="true" style="padding-right: 17px;">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -147,9 +147,9 @@
               <!-- INICIO DIV CLASS BOX-BODY -->
               <div class="modal-body">
                   <div>
-                      <strong>Atividade realizada: </strong> {{acompanhamento1.ATIVIDADE}}
+                      <strong>Atividade realizada: </strong> {{acompanhamento.ATIVIDADE}}
                       <strong style="margin-left: 30px"> Data: </strong>
-                      {{acompanhamento1.DATA_ACOMPANHAMENTO | date:'dd/MM/yyyy'}}
+                      {{acompanhamento.DATA_ACOMPANHAMENTO | date:'dd/MM/yyyy'}}
                   </div>
                   <br>
 
