@@ -126,18 +126,15 @@
 
           <td>
 
-
-            <button type="button" class="btn btn-success" style="margin-right: -30px;" data-toggle="modal" attr.data-target="#modal-default{{acompanhamento.CODIGO}}" (click)="acompFull()">
+            <button type="button" class="btn btn-success" style="margin-right: -30px;" data-toggle="modal" attr.data-target="#modal-default{{acompanhamento.CODIGO}}">
               Informações
             </button>
 
-            <!-- <a type="submit" class="btn btn-success botao" [routerLink]="['/acompanhamentos', acompanhamento.CODIGO]">
-              + Opções</a> -->
           </td>
         </tr>
 
         <!-- INICIO MODAL INFORMAÇÃO DO ACOMPANHAMENTO -->
-        <div class="modal fade" id="modal-default{{acompanhamento.CODIGO}}" tabindex="-1" role="dialog" attr.aria-labelledby="modal-default{{acompanhamento.CODIGO}}" aria-hidden="true" style="padding-right: 17px;">
+        <div *ngFor="let acompanhamento of acompanhamentos" class="modal fade" id="modal-default{{acompanhamento.CODIGO}}" tabindex="-1" role="dialog" attr.aria-labelledby="modal-default{{acompanhamento.CODIGO}}" aria-hidden="true" style="padding-right: 17px;">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
