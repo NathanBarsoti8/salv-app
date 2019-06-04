@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AcompanhamentosService } from './../../acompanhamentos/acompanhamentos.service';
-import { Acompanhamento, AcompanhamentoQuery } from './../../acompanhamentos/acompanhamento/acompanhamento.model';
+import { Acompanhamento, AcompanhamentoQuery, AcompanhamentoFuncionarioQuery } from './../../acompanhamentos/acompanhamento/acompanhamento.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -33,19 +33,17 @@ export class ResidenteAcompComponent implements OnInit {
 
   acompanhamentos: Acompanhamento[]
 
-  
   atividade
   data_atividade
-  funcionarios1: any[]
-  residentes1: any[]
-  residentes: any = []
-  funcionarios: any = []
-
-  codigo_acompanhamento: any
+  
   acompanhamento: AcompanhamentoQuery[] = []
   acompanhamento1: Acompanhamento
   selectedResidentes: any = []
   selectedFuncionarios: any = []
+  funcionarios1: any[]
+  residentes1: any[]
+  residentes: any = []
+  funcionarios: any = []
 
   public filter
 
@@ -80,18 +78,30 @@ export class ResidenteAcompComponent implements OnInit {
       dateFinish: this.fb.control(null)
     })
 
-
-    this.acompanhamentosService.AcompanhamentoFuncionarioQuery
-      (this.acompanhamentos.CODIGO).subscribe(acompanhamento_funcionario => {
-        this.selectedFuncionarios = acompanhamento_funcionario
-        console.log('funcionario', this.selectedFuncionarios)
+    
+    this.acompanhamentos.forEach(acomp => {
+      this.acompanhamentosService.AcompanhamentoFuncionarioQuery(acomp.CODIGO.toString())
+      .subscribe(acompanhamento_funcionario => {
+        this.spinner.hide()
+        this.funcionarios1 = acompanhamento_funcionario
+        console.log(this.acompanhamentos)
+        console.log('funcionarios', this.funcionarios1)
       })
+    })
 
-    this.acompanhamentosService.AcompanhamentoResidenteQuery
-      ('4').subscribe(acompanhamento_residente => {
-        this.selectedResidentes = acompanhamento_residente
-        console.log('residentesssss', this.selectedResidentes)
-      })
+    // this.acompanhamentosService.AcompanhamentoResidenteQuery('4')
+    // .subscribe(acompanhamento_residente => {
+    //   this.spinner.hide()
+    //   this.residentes1 = acompanhamento_residente
+    //   console.log('residente', this.residentes1)
+    // })
+
+    // this.acompanhamentosService.AcompanhamentoFuncionarioQuery('4')
+    // .subscribe(acompanhamento_funcionario => {
+    //   this.spinner.hide()
+    //   this.funcionarios1 = acompanhamento_funcionario
+    //   console.log('residente', this.funcionarios1)
+    // })
 
 
   }
