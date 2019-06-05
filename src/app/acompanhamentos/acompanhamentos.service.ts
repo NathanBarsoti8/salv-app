@@ -105,8 +105,4 @@ export class AcompanhamentosService {
         return this.http.get(`${SALV_API}/relatorio-acompanhamento/${cod_acomp}`, { responseType: 'blob' })
     }
 
-    acompFull(): Observable<Acompanhamento[]> {
-        return this.http.get<Acompanhamento[]>(`${SALV_API}/acompanhamento-residente`)
-    }
-
 }

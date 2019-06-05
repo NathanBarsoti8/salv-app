@@ -83,33 +83,6 @@ export class ResidenteAcompComponent implements OnInit {
       dateFinish: this.fb.control(null)
     })
 
-
-    this.acompanhamentos.forEach(acomp => {
-      this.acompanhamentosService.AcompanhamentoFuncionarioQuery(acomp.CODIGO.toString())
-        .subscribe(acompanhamento_funcionario => {
-          this.spinner.hide()
-          this.funcionarios1 = acompanhamento_funcionario
-          console.log(acompanhamento_funcionario)
-          console.log(this.acompanhamentos)
-          console.log('funcionarios', this.funcionarios1)
-        })
-    })
-
-    // this.acompanhamentosService.AcompanhamentoResidenteQuery('4')
-    // .subscribe(acompanhamento_residente => {
-    //   this.spinner.hide()
-    //   this.residentes1 = acompanhamento_residente
-    //   console.log('residente', this.residentes1)
-    // })
-
-    // this.acompanhamentosService.AcompanhamentoFuncionarioQuery('4')
-    // .subscribe(acompanhamento_funcionario => {
-    //   this.spinner.hide()
-    //   this.funcionarios1 = acompanhamento_funcionario
-    //   console.log('residente', this.funcionarios1)
-    // })
-
-
   }
 
   buscaInfosAcompanhamento(number) {
